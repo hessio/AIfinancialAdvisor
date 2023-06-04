@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<head>
+    <title>Personalized Financial Advice</title>
+    <style>
+        .chat-container {
+            border: 1px solid #ccc;
+            padding: 10px;
+            height: 300px;
+            overflow-y: scroll;
+        }
+        .chat-item {
+            margin-bottom: 10px;
+        }
+        .user-input {
+            text-align: left;
+            margin-right: 50px;
+            margin-bottom: 10px;
+            float: right;
+            padding: 6px;
+            border-radius: 10px;
+            background-color: skyblue;
+        }
+        .response {
+            text-align: left;
+            margin-bottom: 10px;
+            margin-left: 50px;
+            background-color: MediumSeaGreen;
+            padding: 6px;
+            border-radius: 10px;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Personalized Financial Advice</h1>
+    <div class="chat-container">
+        {% for chat in chat_history %}
+            <div class="chat-item">
+                <span class="user-input">{{ chat.user_input }}</span><br>
+                <span class="response">{{ chat.response }}</span>
+            </br>
+            </div>
+        {% endfor %}
+    </div>
+    </br>
+    <form action="/financial_advice" method="POST">
+        <div class="field">
+          <div class="control">
+            <textarea id="user_input" class="input" rows="2" name="financial_situation" placeholder="Financial Situation" style="min-height: 120px;"></textarea>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <textarea id="user_input" class="input" rows="2" name="spending_patterns" placeholder="Spending Patterns" style="min-height: 120px;"></textarea>
+          </div>
+        </div>
+
+         <div class="field">
+          <div class="control">
+            <textarea id="user_input" class="input" rows="2" name="savings_goals" placeholder="Savings Goals" style="min-height: 120px;"></textarea>
+          </div>
+        </div>
+        <button class="button is-block is-info is-large is-fullwidth">Get Advice</button>
+    </form>
+</body>
+
+{% endblock %}

@@ -1,0 +1,140 @@
+<!-- templates/profile.html -->
+
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Budgeting and Expense Tracking</title>
+    <style>
+        table {
+          border-collapse: collapse;
+        }
+        th, td {
+          border: 1px solid black;
+          padding: 8px;
+          text-align: left;
+        }
+        th {
+          background-color: #f2f2f2;
+        }
+        .add-expense:hover{
+          transform: scale(1.1);
+        }
+        .canvas-div1:hover{
+            transform: scale(1.1);
+        }
+        .canvas-div2:hover{
+            transform: scale(1.1);
+        }
+        .tables:hover{
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <h1 style="font-size: 35px;"><strong>Budgeting and Expense Tracking</strong></h1>
+    <div style="display: flex; justify-content: space-between;">
+        <div class="tables" style="margin-left: 30px; background-color: #f2f2f2; display: flex; align-items: flex-start; padding:22px; margin-right: 0px; max-width:40%;border-radius: 20px;">
+            <table style="background-color: inherit; border-radius: 20px;">
+              <tr>
+                <th>Income</th>
+                <th>Amount</th>
+              </tr>
+                <tr>
+                  <td>Income</td>
+                  <td>€{{ budget.income }}</td>
+                </tr>
+            </table>
+
+            <table>
+              <tr>
+                <th>Expense</th>
+                <th>Amount</th>
+              </tr>
+              {% for category, amount in budget.categories.items() %}
+                <tr>
+                  <td style="max-width: 170px;">{{ category }}</td>
+                  <td>€{{ amount }}</td>
+                </tr>
+              {% endfor %}
+            </table>
+        </div>
+        <div  style="max-height: 850px; margin-top: 0px; display: flex; align-items: flex-start; margin-right: 50px;">
+            <div style="background-color: inherit;">
+                <canvas class="canvas-div1" id="pieChart" style="background-color: #f2f2f2; padding: 5px; height: 200px; border-radius: 20px;"></canvas>
+            </div>
+            <div style="width: 30px;"></div>
+            <div style="background-color: inherit;">
+                <canvas class="canvas-div2" id="incomePieChart" style="background-color: #f2f2f2; padding: 5px; height: 200px; border-radius: 20px;"></canvas>
+            </div>
+        </div>
+    </div>
+    </br>
+    <div class="add-expense" style="padding: 12px; background-color: #f2f2f2; max-width: 550px; display:inline-block; border-radius: 10px; justify-content: space-between;">
+        <h2 style="background-color: inherit;"><strong style="background-color: inherit; display:inline-block;">Add Expense</strong></h2>
+        <form style="background-color: inherit; width: 60%; display:inline-block; min-width: 500px; justify-items: center;" action="/add_expense" method="post">
+
+            <div class="field">
+              <div class="control">
+                <textarea id="user_input" class="input" rows="1" name="category" placeholder="Category" style="min-height: 45px;"></textarea>
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="control">
+                <textarea id="user_input" class="input" rows="1" name="amount" placeholder="Amount" style="min-height: 45px;"></textarea>
+              </div>
+            </div>
+
+            <button style="margin:auto; width:50%;" class="button is-block is-info is-large is-fullwidth">Add Expense</button>
+        </form>
+    </div>
+    </br>
+    </br>
+    <script>
+        fetch('/chart_data')
+            .then(response => response.json())
+            .then(data => {
+                var ctx = document.getElementById('pieChart').getContext('2d');
+                var pieChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: data.labels,
+                        datasets: [{
+                            data: data.data,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.6)',
+                                'rgba(54, 162, 235, 0.6)',
+                                'rgba(255, 206, 86, 0.6)',
+                                'rgba(75, 192, 192, 0.6)',
+                            ],
+                        }]
+                    },
+                });
+            });
+
+        fetch('/income_data')
+            .then(response => response.json())
+            .then(data => {
+                var ctx = document.getElementById('incomePieChart').getContext('2d');
+                var pieChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: data.labels,
+                        datasets: [{
+                            data: data.data,
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.6)',
+                                'rgba(255, 99, 132, 0.6)',
+                                'rgba(255, 206, 86, 0.6)',
+                                'rgba(75, 192, 192, 0.6)',
+                            ],
+                        }]
+                    },
+                });
+            });
+    </script>
+
+</body>
+{% endblock %}

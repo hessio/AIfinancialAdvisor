@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+  background-color: #FFFFFF;
+  color: black;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #AAB7B8;
+  color: black;
+}
+
+form{
+  background-color: white;
+}
+
+.field{
+  background-color: white; 
+}
+
+.checkbox{
+  background-color: white;
+}
+
+.control{
+  background-color: white;
+}

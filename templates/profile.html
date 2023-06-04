@@ -1,0 +1,26 @@
+<!-- templates/profile.html -->
+
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <meta charset="UTF-8">
+  <title>Landing Page</title>
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/registerpage.css') }}">
+  <!-- <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/app.css') }}"> -->
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/base.css') }}">
+</head>
+
+<h1 class="title" style="color:black;">
+  Welcome, {{ name }}!
+</h1>
+
+<div class="choice">
+  <a href="/financial_advice" class="button is-block is-info is-large is-fullwidth" style="border-radius: 30px;">Financial Advice</a>
+  </br>
+  <a href="/budgeting" class="button is-block is-info is-large is-fullwidth" style="border-radius: 30px;">Budget Page</a>
+  </br>
+  <a href="/#" class="button is-block is-info is-large is-fullwidth" style="border-radius: 30px;">Your ads</a>
+</div>
+{% endblock %}

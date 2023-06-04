@@ -1,0 +1,26 @@
+<!-- templates/index.html -->
+
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <meta charset="UTF-8">
+  <title>Landing Page</title>
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/registerpage.css') }}">
+  <!-- <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/app.css') }}"> -->
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/base.css') }}">
+</head>
+<h1 class="title" style="color:black;">
+  Local Marketplace
+</h1>
+<h2 class="subtitle" style="color:black;">
+  Login or Signup to see what we have for sale, or sell your own items!
+</h2>
+<!-- <button onclick="location.href='/signup'">Register</button> -->
+<div class="choice">
+  <a href="/signup" class="button is-block is-info is-large is-fullwidth">Register</a>
+  </br>
+  <a href="/login" class="button is-block is-info is-large is-fullwidth">Login</a>
+</div>
+{% endblock %}
