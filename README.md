@@ -1,5 +1,9 @@
 # AIfinancialAdvisor
-AI Financial Advisor Flask app
+AI Financial Advisor Flask app.
+
+To use the app you must sign up for a subscription. This is automatically processed when you sign up using the Square API and an invoice is sent to your email address once you complete the sign up process.
+
+This app was built for the Square Hackathon: https://square2023.devpost.com/resources
 
 An app that uses the open AI api to provide a financial plan while also providing a page to create your own personalised budget
 
